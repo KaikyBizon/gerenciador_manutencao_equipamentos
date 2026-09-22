@@ -3,50 +3,74 @@
 
 
 typedef struct no{
-int info;
-struct no *prox;
+    int codigo_sol;
+    char cod_equip[7];
+    char nome_equip[21];
+    int prioridade;
+    int periodo;
+    struct no *prox;
 }no;
 
 typedef struct lista{
-no *inicio;
-
+    no *inicio;
 }lista;
 
-lista *inicializa_lista{
-return NULL;
+lista *inicializa_lista(){
+    return NULL;
 }
 
 lista *crialista(){
-lista *aux;
-aux = (lista*)malloc(sizeof(lista));
-aux -> inicio = NULL;
-return aux;
+    lista *aux;
+    aux = (lista*)malloc(sizeof(lista));
+    aux -> inicio = NULL;
+    return aux;
+}
+
+Lista *InsereNovaSol(Lista *L, equipamento novo_equip){
+    no *aux, ant;
+    aux = L->inicio;
+    while(aux != NULL){
+        if(cod > aux->codigo_sol){
+            no* novo;
+            novo = (no*)malloc(sizeof(no));
+            novo->codigo_sol = novo_equip.cod_sltc;
+            novo->cod_equip = novo_equip.cod_equip;
+            novo->nome_equip = novo_equip.nome_equip;
+            novo->prioridade = novo_equip.prioridade;
+            novo->periodo = novo_equip.periodo;
+
+            novo->prox = aux;
+            ant->prox = novo;
+        }
+    ant = aux;
+    aux = aux->prox;
+    }
 }
 
 no auxinsere_qualquer(no *antigo,int v,int pos){
-no * nova,* aux = NULL, *aux1;
-int cont
-nova = (no*)malloc(sizeof(no));
-nova -> info = v;
-nova -> prox = NULL;
-aux1 = antigo;
-cont = 1;
-while((aux1!=NULL)&&(cont<pos)){
-    aux=aux1;
-    aux1 = aux1 -> prox;
-    cont++;
-}
-if(aux==NULL){
-    novo -> prox = antigo;
-    return novo;
-}
-novo -> prox = aux1;
-aux -> prox = novo;
-return antigo;
+    no * nova,* aux = NULL, *aux1;
+    int cont
+    nova = (no*)malloc(sizeof(no));
+    nova -> info = v;
+    nova -> prox = NULL;
+    aux1 = antigo;
+    cont = 1;
+    while((aux1!=NULL)&&(cont<pos)){
+        aux=aux1;
+        aux1 = aux1 -> prox;
+        cont++;
+    }
+    if(aux==NULL){
+        novo -> prox = antigo;
+        return novo;
+    }
+    novo -> prox = aux1;
+    aux -> prox = novo;
+    return antigo;
 }
 
 void insere_qualquer(lista *velho,int valor,int pos){
-velho -> inicio = auxinsere_qualquer(velho -> inicio,valor,pos);
+    velho -> inicio = auxinsere_qualquer(velho -> inicio,valor,pos);
 }
 
 no *auxremove_qualquer(no *antigo, int pos) {
