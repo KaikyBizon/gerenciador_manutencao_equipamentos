@@ -4,7 +4,7 @@
 typedef struct equipamento {
     int cod_sltc;
     char cod_equip[8];
-    char nome_equip[21];
+    char nome_equip[22];
     int prioridade;
     int periodo;
 };
@@ -32,19 +32,49 @@ int main() {
                 } while(flag != 1);
 
                 do {
+                    flag = 0;
                     printf("Digite o código do equipamento:");
+
                     fgets(equipamento.cod_equip, 8, stdin);
-                } while();
+                    equipamento.cod_equip[strcspn(equipamento.cod_equip, "\n")] = '\0';
+
+
+                    if (strlen(equipamento.cod_equip) > 6) {
+                        printf("Erro: O código '%s' tem mais de 6 caracteres!\n\n", equipamento.cod_equip);
+                        flag = 1;
+                    } else if (strlen(equipamento.cod_equip) == 0) {
+                        printf("Erro: O código nao pode ser vazio!\n\n");
+                        flag = 1;
+                    } else {
+                        flag = 0;
+                    }
+
+                } while(flag != 0);
 
                 do {
+                    flag = 0;
                     printf("Digite o nome do equipamento: ");
+
                     fgets(equipamento.cod_equip, 22, stdin);
-                } while();
+                    equipamento.nome_equip[strcspn(equipamento.nome_equip, "\n")] = '\0';
+
+                    if (strlen(equipamento.nome_equip) > 20) {
+                        printf("O nome deve ter no máximo 20 caracteres!\n\n");
+                        flag = 1;
+                    } else if (strlen(equipamento.nome_equip) < 2) {
+                        printf("Nome muito curto! O nome deve ter no mínimo 2 caracteres.");
+                        flag = 1;
+                    } else {
+                        flag = 0;
+                    }
+                } while(flag != 0);
 
                 do {
                     flag = 0;
                     printf("Selecione a prioridade do equipamento: \n\n 1 - Alta \n 2 - Média \n 3 - Baixa");
                     flag = scanf("%d", &equipamento.prioridade);
+
+                    printf("Valor inválido. Digite um numero de  1 a 3");
                 } while(flag != 1);
 
                 do {
