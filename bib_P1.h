@@ -4,8 +4,8 @@
 
 typedef struct no{
     int codigo_sol;
-    char cod_equip[7];
-    char nome_equip[21];
+    char cod_equip[8];
+    char nome_equip[22];
     int prioridade;
     int periodo;
     struct no *prox;
