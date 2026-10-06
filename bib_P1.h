@@ -50,17 +50,14 @@ velho -> inicio = auxinsere_qualquer(velho -> inicio,valor,pos);
 }
 
 no *auxremove_qualquer(no *antigo, int pos) {
-    no *aux = NULL, *aux1;
-    int cont;
 
-    if (antigo == NULL) {
-        return NULL;
-    }
+    no *aux = NULL, *aux1;
+    int cont = 1;
 
     aux1 = antigo;
-    cont = 1;
 
     while ((aux1 != NULL) && (cont < pos)) {
+
         aux = aux1;
         aux1 = aux1->prox;
         cont++;
@@ -82,6 +79,16 @@ no *auxremove_qualquer(no *antigo, int pos) {
 }
 
 void remove_qualquer(lista *velho, int pos) {
+    if(velho == NULL){
+        printf("A lista não existe");
+    }
+    if(velho -> inicio == NULL){
+        printf("A lista está vazia");
+    }
+
+    if(pos<=0){
+        printf("A posição não existe");
+    }
     velho->inicio = auxremove_qualquer(velho->inicio, pos);
 }
 
@@ -95,10 +102,9 @@ no *auxlocaliza(no *inicio, int valor) {
         }
         aux1 = aux1->prox;
     }
-
-    return NULL;
 }
 
+// arrumar o localiza
 no *localiza(lista *velho, int valor) {
     if (velho == NULL) {
         return NULL;
@@ -106,6 +112,7 @@ no *localiza(lista *velho, int valor) {
     return auxlocaliza(velho->inicio, valor);
 }
 
+// arrumar ordenado
 no *auxinsere_ordenado(no *inicio, int v) {
     no *nova, *aux = NULL, *aux1;
 
