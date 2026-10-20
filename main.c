@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "bib_P1.h"
 #include <locale.h>
+#include <ctype.h>
 
 int main() {
 
@@ -33,6 +34,7 @@ int main() {
                 } while (1);
 
                 do {
+                    flag = 1;
                     while (getchar() != '\n');
                     printf("Digite o código do equipamento (ex: OSC023): ");
                     fgets(novo_equip.cod_equip, 8, stdin);
@@ -41,9 +43,28 @@ int main() {
                     if (strlen(novo_equip.cod_equip) != 6) {
                         printf("Erro: O código deve ter exatamente 6 caracteres (ex: OSC023)!\n\n");
                         flag = 0;
-                    } else {
-                        flag = 1;
                     }
+
+                    if(flag == 1){
+                        for(int i = 0; i < 3; i++){
+                            if(!isdigit(novo_equip.cod_equip[i])){
+                                printf("O código deve começar por 3 letras (ex: OSC023).");
+                                flag = 0;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(flag == 1){
+                        for(int i = 3; i < 6; i++){
+                            if(!isalpha(novo_equip.cod_equip[i])){
+                                printf("Os últimos 3 caracteres devem ser números (ex: OSC023).");
+                                flag = 0;
+                                break;
+                            }
+                        }
+                    }
+
                 } while (flag != 1);
 
                 do {
