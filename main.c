@@ -5,7 +5,6 @@
 #include <ctype.h>
 
 int main() {
-
     setlocale(LC_ALL, "Portuguese");
     lista *gerenciador = crialista();
     gerenciador = inicializa_lista(gerenciador);
@@ -25,9 +24,9 @@ int main() {
         switch (opt) {
             case 1: {
                 do {
-                    novo_equip.cod_sltc = ler_codigo_solicitacao("\nDigite o código da solicitação (4 dígitos): ");
-                    if (consultar_solicitacao_silencioso(gerenciador, novo_equip.cod_sltc) != NULL) {
-                        printf("Erro: Já existe uma solicitação com o código %d!\n\n", novo_equip.cod_sltc);
+                    novo_equip.cod_sol = ler_codigo_solicitacao("\nDigite o código da solicitação (4 dígitos): ");
+                    if (buscar_solicitacao(gerenciador, novo_equip.cod_sol) != NULL) {
+                        printf("Erro: Já existe uma solicitação com o código %d!\n\n", novo_equip.cod_sol);
                     } else {
                         break;
                     }
@@ -45,20 +44,20 @@ int main() {
                         flag = 0;
                     }
 
-                    if(flag == 1){
-                        for(int i = 0; i < 3; i++){
-                            if(!isdigit(novo_equip.cod_equip[i])){
-                                printf("O código deve começar por 3 letras (ex: OSC023).");
+                    if (flag == 1) {
+                        for (int i = 0; i < 3; i++) {
+                            if (!isalpha(novo_equip.cod_equip[i])) {
+                                printf("O código deve começar por 3 letras (ex: OSC023).\n");
                                 flag = 0;
                                 break;
                             }
                         }
                     }
 
-                    if(flag == 1){
-                        for(int i = 3; i < 6; i++){
-                            if(!isalpha(novo_equip.cod_equip[i])){
-                                printf("Os últimos 3 caracteres devem ser números (ex: OSC023).");
+                    if (flag == 1) {
+                        for (int i = 3; i < 6; i++) {
+                            if (!isdigit(novo_equip.cod_equip[i])) {
+                                printf("Os últimos 3 caracteres devem ser números (ex: OSC023).\n");
                                 flag = 0;
                                 break;
                             }
@@ -162,7 +161,7 @@ int main() {
             }
 
             case 0: {
-                printf("\nEncerrando o sistema e liberando memória...\n");
+                printf("Encerrando o sistema e liberando memória\n");
                 gerenciador = liberar_lista(gerenciador);
                 printf("Sistema finalizado com sucesso!\n");
                 break;
